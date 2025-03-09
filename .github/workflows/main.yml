@@ -4,9 +4,6 @@ on:
       NPM_TOKEN:
         required: true
         description: NPM token
-      GITHUB_TOKEN:
-        required: true
-        description: GitHub token
     inputs:
       scope:
         type: string
