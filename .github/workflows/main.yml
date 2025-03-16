@@ -9,6 +9,11 @@ on:
         type: string
         required: false
         description: NPM scope
+      has-dist:
+        type: boolean
+        required: false
+        description: Does this project have a dist folder?
+        default: true
       
 
 concurrency:
@@ -62,7 +67,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: ${{ inputs.scope }}
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
+      - if: inputs.has-dist
+        uses: actions/download-artifact@v4
         with:
           name: dist-lts
           path: .      
