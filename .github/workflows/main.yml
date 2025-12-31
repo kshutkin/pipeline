@@ -43,6 +43,7 @@ jobs:
           name: dist-${{ (matrix.node-version == 'latest') && 'latest' || 'lts' }}
           path: |
             */dist
+            */types
 
   publish:
 
