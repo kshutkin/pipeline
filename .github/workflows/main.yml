@@ -16,8 +16,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }} 
   cancel-in-progress: true
 
-permissions: write-all
-
 jobs:
   build:
 
@@ -56,8 +54,11 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write  # Required for OIDC
-      contents: read
+      id-token: write
+      contents: write
+      packages: write
+      pull-requests: write
+      issues: read
 
     steps:
       - uses: actions/checkout@v4
