@@ -53,12 +53,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: write
-      packages: write
-      pull-requests: write
-      issues: read
+    permissions: write-all
 
     steps:
       - uses: actions/checkout@v4
