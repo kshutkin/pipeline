@@ -28,7 +28,7 @@ jobs:
                 node-version: [lts/*, latest]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                   fetch-depth: 0
             - run: npm install -g pnpm@10.x
@@ -59,7 +59,7 @@ jobs:
         permissions: write-all
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                   fetch-depth: 0
             - run: npm install -g pnpm@10.x
