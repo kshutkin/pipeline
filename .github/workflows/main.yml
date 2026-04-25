@@ -47,6 +47,30 @@ jobs:
                       */dist
                       */types
 
+    coverage-badges:
+        if: github.ref_name == 'main'
+
+        needs: build
+
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - run: npm install -g pnpm@10.x
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "lts/*"
+                  cache: "pnpm"
+            - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
+            - run: pnpm --if-present build
+            - run: pnpm --if-present test
+            - uses: kshutkin/github-action-coverage-badge@v1
+
     publish:
         if: github.ref_name == 'main'
 
