@@ -48,6 +48,12 @@ jobs:
                       */dist
                       types
                       */types
+            - if: matrix.node-version == 'lts/*'
+              uses: actions/upload-artifact@v7
+              with:
+                  name: coverage
+                  path: "**/coverage"
+                  if-no-files-found: ignore
 
     coverage-badges:
         if: github.ref_name == 'main'
@@ -63,19 +69,11 @@ jobs:
             - uses: actions/checkout@v6
               with:
                   fetch-depth: 0
-            - uses: actions/checkout@v6
+            - uses: actions/download-artifact@v8
               with:
-                  repository: kshutkin/github-action-coverage-badge
-                  path: .github/actions/coverage-badge
-            - run: npm install -g pnpm@10.x
-            - uses: actions/setup-node@v6
-              with:
-                  node-version: "lts/*"
-                  cache: "pnpm"
-            - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-            - run: pnpm --if-present build
-            - run: pnpm --if-present test
-            - uses: ./.github/actions/coverage-badge
+                  name: coverage
+                  path: .
+            - uses: kshutkin/github-action-coverage-badge@main
 
     publish:
         if: github.ref_name == 'main'
