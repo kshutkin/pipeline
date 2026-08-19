@@ -101,7 +101,7 @@ jobs:
                   name: dist-lts
                   path: .
             - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-            - uses: changesets/action@v1
+            - uses: changesets/action@v2.1.1
               with:
                   commit: "chore: update versions"
                   title: "chore: release"
