@@ -101,11 +101,11 @@ jobs:
                   name: dist-lts
                   path: .
             - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-            - uses: changesets/action@v1
+            - uses: changesets/action@v2
               with:
-                  commit: "chore: update versions"
-                  title: "chore: release"
-                  publish: "pnpm run ci:publish"
+                  commit-message: "chore: update versions"
+                  pr-title: "chore: release"
+                  publish-script: "pnpm run ci:publish"
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
