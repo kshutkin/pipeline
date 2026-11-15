@@ -1,9 +1,5 @@
 on:
     workflow_call:
-        secrets:
-            NPM_TOKEN:
-                required: true
-                description: NPM token
         inputs:
             scope:
                 type: string
@@ -14,6 +10,9 @@ on:
                 required: false
                 description: Does this project have a dist folder?
                 default: true
+
+permissions:
+    contents: read
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
@@ -82,7 +81,10 @@ jobs:
 
         runs-on: ubuntu-latest
 
-        permissions: write-all
+        permissions:
+            contents: write
+            pull-requests: write
+            id-token: write
 
         steps:
             - uses: actions/checkout@v6
@@ -107,5 +109,3 @@ jobs:
                   pr-title: "chore: release"
                   publish-script: "pnpm run ci:publish"
                   github-token: ${{ secrets.GITHUB_TOKEN }}
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
