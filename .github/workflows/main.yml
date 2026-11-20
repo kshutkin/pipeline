@@ -27,7 +27,7 @@ jobs:
                 node-version: [lts/*, latest]
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
               with:
                   fetch-depth: 0
             - run: npm install -g pnpm@10.x
@@ -65,7 +65,7 @@ jobs:
             contents: write
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
               with:
                   fetch-depth: 0
             - uses: actions/download-artifact@v8
@@ -87,7 +87,7 @@ jobs:
             id-token: write
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
               with:
                   fetch-depth: 0
             - run: npm install -g pnpm@10.x
